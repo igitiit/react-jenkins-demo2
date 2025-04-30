@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            nodejs 'node:23-alpine'  // This must match exactly what you configure in Jenkins
+            image 'node:23-alpine'  // This specifies the Docker image to use
             args '-p 3000:3000'
         }
     }
