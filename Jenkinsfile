@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        nodejs 'Node23'  // Use the name Jenkins suggests is configured
+        nodejs 'Node23'
     }
     
     environment {
@@ -17,14 +17,20 @@ pipeline {
         }
         stage('Debug Tests') {
             steps {
-               bat 'dir src'
-               bat 'git ls-files src'
-               bat 'npm test -- --listTests'
+                // Show files in src
+                bat 'dir src'
+                // Show what Git thinks is tracked
+                bat 'git ls-files src'
+                // Print contents of App.test.js
+                bat 'type src\\App.test.js'
+                // Show what Jest thinks are test files
+                bat 'npm test -- --listTests'
             }
         }
         stage('Test') {
             steps {
-                bat 'npm test -- --watchAll=false'
+                // Force Jest to run App.test.js directly
+                bat 'npm test -- src/App.test.js --watchAll=false'
             }
         }
         stage('Build Production') {
@@ -35,7 +41,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat 'echo Deploying to production server'
-                // In a real environment, you would add actual deployment commands here
             }
         }
     }
