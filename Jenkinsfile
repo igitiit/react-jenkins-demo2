@@ -32,6 +32,15 @@ pipeline {
 
         }
 
+        stage('Debug Tests') {
+            steps {
+                bat 'dir src'
+                bat 'git ls-files src'
+                bat 'npm test -- --listTests'
+        }
+        
+        }
+
         stage('Test') {
 
             steps {
