@@ -1,10 +1,10 @@
 pipeline {
     agent any
-
+    // chg1
     tools {
-        nodejs 'Node25'   // Make sure this matches your Jenkins NodeJS tool name
+        nodejs 'Node25'  // Uses the name for Jenkins configuration shown on pg. 6
     }
-
+    
     environment {
         CI = 'true'
     }
